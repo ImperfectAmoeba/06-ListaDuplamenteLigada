@@ -150,18 +150,67 @@ void inserirElemento()
 // funções a serem implementadas no exericio
 void exibirReverso()
 {
-
+	if (ultimo == NULL) { //se a lista estiver vazia (primeiro elemento não tem valor)
+		cout << "Lista vazia \n"; //diga ao usuário: "Lista vazia"
+		return;
+	}
+	else { 
+		cout << "Elementos: \n";
+		NO* aux = ultimo; //nó auxiliar equivale ao primeiro elemento
+		while (aux != NULL) { //enquanto o nó auxiliar for diferente de nulo
+			cout << aux->valor << endl; //mostrar ao usuario o valor apontado pelo nó auxiliar
+			aux = aux->ant; //auxiliar é equivalente ao auxiliar apontando para o anterior
+		}
+	}
 }
 
 void excluirPrimeiroElemento()
 {
+	if (primeiro == NULL) { //se a lista estiver vazia (primeiro elemento não tem valor)
+		cout << "Lista vazia \n"; //diga ao usuário: "Lista vazia"
+		return;
+	}
 
+	NO* excluir = primeiro;
+	primeiro = primeiro->prox;
+
+	if (primeiro != NULL) {
+		primeiro->ant = NULL;
+	}
+	else {
+		ultimo = NULL;
+	}
+	free(excluir);
+	cout << "Primeiro numero excluido" << endl;
 }
+
 
 void excluirUltimoElemento()
 {
+	if (primeiro == NULL) { // Check if the list is empty
+		cout << "Lista vazia \n"; // Inform the user that the list is empty
+		return;
+	}
 
+	if (primeiro->prox == NULL) {
+		delete primeiro; 
+		primeiro = NULL; 
+		ultimo = NULL;  
+		cout << "Ultimo numero excluido" << endl;
+		return;
+	}
+
+	NO* atual = primeiro;
+	while (atual->prox != ultimo) {
+		atual = atual->prox;
+	}
+
+	delete ultimo; // Delete the last node
+	ultimo = atual; // Update `ultimo` to the second-to-last node
+	ultimo->prox = NULL; // Set the new last node's `prox` to NULL
+	cout << "Ultimo numero excluido" << endl;
 }
+
 
 
 
